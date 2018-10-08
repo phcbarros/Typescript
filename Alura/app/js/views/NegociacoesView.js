@@ -1,7 +1,4 @@
-class NegociaoesView {
-    constructor(seletor) {
-        this._elemento = document.querySelector(seletor);
-    }
+class NegociaoesView extends View {
     update(modelo) {
         this._elemento.innerHTML = this._template(modelo);
     }
