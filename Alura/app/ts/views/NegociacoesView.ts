@@ -7,10 +7,10 @@ class NegociaoesView {
   }
 
   update(modelo: Negociacoes): void {
-    this._elemento.innerHTML = this.template(modelo);
+    this._elemento.innerHTML = this._template(modelo);
   }
 
-  private template(modelo: Negociacoes): string {
+  private _template(modelo: Negociacoes): string {
     return `
       <table class="table table-hover table-bordered">
           <thead>

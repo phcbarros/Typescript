@@ -3,9 +3,9 @@ class NegociaoesView {
         this._elemento = document.querySelector(seletor);
     }
     update(modelo) {
-        this._elemento.innerHTML = this.template(modelo);
+        this._elemento.innerHTML = this._template(modelo);
     }
-    template(modelo) {
+    _template(modelo) {
         return `
       <table class="table table-hover table-bordered">
           <thead>
