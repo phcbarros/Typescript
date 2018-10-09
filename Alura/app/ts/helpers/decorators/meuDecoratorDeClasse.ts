@@ -2,9 +2,6 @@ export function meuDecoratorDeClasse() {
 
   return function (construtor: any) {
 
-    debugger
-    console.log(construtor);
-
     // guarda o constructor original, pois iremos definir um novo
     const construtorOriginal = construtor;
 
