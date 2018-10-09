@@ -3,7 +3,7 @@ import { NegociacoesView, MensagemView } from '../views/index';
 
 export class NegociacaoController {
 
-  private _inputData: JQuery;
+  private _inputData: htmlint;
   private _inputValor: JQuery;
   private _inputQuantidade: JQuery;
   private _negociacoes = new Negociacoes();
@@ -22,9 +22,9 @@ export class NegociacaoController {
     event.preventDefault();
 
     const negociacao = new Negociacao(
-      new Date(this._inputData.val().toString().replace(/-/g, ',')), 
-      parseInt(this._inputQuantidade.val().toString()), 
-      parseFloat(this._inputValor.val().toString())
+      new Date(this._inputData.val().replace(/-/g, ',')), 
+      parseInt(this._inputQuantidade.val()), 
+      parseFloat(this._inputValor.val())
     );
 
     this._negociacoes.adicionar(negociacao);
