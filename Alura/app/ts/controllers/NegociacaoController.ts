@@ -1,7 +1,8 @@
 import { Negociacao, Negociacoes } from '../models/index';
 import { NegociacoesView, MensagemView } from '../views/index';
-import { domInject} from '../helpers/decorators/index';
+import { domInject, meuDecoratorDeClasse } from '../helpers/decorators/index';
 
+@meuDecoratorDeClasse()
 export class NegociacaoController {
 
   @domInject('#data')
@@ -10,10 +11,11 @@ export class NegociacaoController {
   private _inputValor: JQuery;
   @domInject('#quantidade')
   private _inputQuantidade: JQuery;
+  
   private _negociacoes = new Negociacoes();
   private _negociacoesView = new NegociacoesView('#negociacoesView');
   private _mensagemView = new MensagemView('#mensagemView');
-
+ 
   constructor() {
     this._negociacoesView.update(this._negociacoes);
   }
