@@ -15,24 +15,24 @@ export class NegociacaoController {
   private _negociacoes = new Negociacoes();
   private _negociacoesView = new NegociacoesView('#negociacoesView');
   private _mensagemView = new MensagemView('#mensagemView');
- 
+
   constructor() {
     this._negociacoesView.update(this._negociacoes);
   }
 
-  adicionar(event: Event) {
+  adicionar(event: Event): void {
     event.preventDefault();
 
-    const data =  new Date(this._inputData.val().replace(/-/g, ','));
+    const data = new Date(this._inputData.val().replace(/-/g, ','));
 
-    if(!this._ehDiaUtil(data)) {
+    if (!this._ehDiaUtil(data)) {
       this._mensagemView.update('As negociações só podem ser executadas em dias úteis.');
       return;
     }
 
     const negociacao = new Negociacao(
-      data, 
-      parseInt(this._inputQuantidade.val()), 
+      data,
+      parseInt(this._inputQuantidade.val()),
       parseFloat(this._inputValor.val())
     );
 
@@ -46,8 +46,25 @@ export class NegociacaoController {
     return diaDaSemana != DiasDaSemana.Sabado && diaDaSemana != DiasDaSemana.Domingo;
   }
 
-  importarDados() {
-    alert('oi');
+  importarDados(): void {
+    fetch('http://localhost:8080/dados')
+      .then((res: Response) => this._isOK(res))
+      .then((res: Response) => res.json())
+      .then((dados: any[]) => {
+        dados
+          .map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
+          .forEach(negociacao => this._negociacoes.adicionar(negociacao));
+
+        this._negociacoesView.update(this._negociacoes);
+      })
+      .catch(err => console.log(err));
+  }
+
+  private _isOK(res: Response): any {
+    if (res.ok)
+      return res
+    else
+      throw new Error(res.statusText);
   }
 }
 
