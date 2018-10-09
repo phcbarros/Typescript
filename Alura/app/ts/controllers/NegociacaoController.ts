@@ -3,7 +3,7 @@ import { NegociacoesView, MensagemView } from '../views/index';
 
 export class NegociacaoController {
 
-  private _inputData: htmlint;
+  private _inputData: JQuery;
   private _inputValor: JQuery;
   private _inputQuantidade: JQuery;
   private _negociacoes = new Negociacoes();
@@ -21,8 +21,15 @@ export class NegociacaoController {
   adicionar(event: Event) {
     event.preventDefault();
 
+    const data =  new Date(this._inputData.val().replace(/-/g, ','));
+
+    if(!this._ehDiaUtil(data)) {
+      this._mensagemView.update('As negociações só podem ser executadas em dias úteis.');
+      return;
+    }
+
     const negociacao = new Negociacao(
-      new Date(this._inputData.val().replace(/-/g, ',')), 
+      data, 
       parseInt(this._inputQuantidade.val()), 
       parseFloat(this._inputValor.val())
     );
@@ -31,4 +38,19 @@ export class NegociacaoController {
     this._negociacoesView.update(this._negociacoes);
     this._mensagemView.update('Negociação adicionada com sucesso!');
   }
+
+  private _ehDiaUtil(data: Date): boolean {
+    const diaDaSemana = data.getDay();
+    return diaDaSemana != DiasDaSemana.Sabado && diaDaSemana != DiasDaSemana.Domingo;
+  }
+}
+
+enum DiasDaSemana {
+  Domingo,
+  Segunda,
+  Terca,
+  Quarta,
+  Quinta,
+  Sexta,
+  Sabado
 }
