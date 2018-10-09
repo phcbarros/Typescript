@@ -1,7 +1,9 @@
-class NegociaoesView extends View<Negociacoes> {
+namespace Views {
 
-  template(modelo: Negociacoes): string {
-    return `
+  export class NegociaoesView extends Views.View<Negociacoes> {
+
+    template(modelo: Negociacoes): string {
+      return `
       <table class="table table-hover table-bordered">
           <thead>
               <tr>
@@ -13,8 +15,8 @@ class NegociaoesView extends View<Negociacoes> {
           </thead>
           
           <tbody>
-            ${modelo.paraArray().map(negociacao => 
-              `
+            ${modelo.paraArray().map(negociacao =>
+          `
                 <tr>
                   <td>${negociacao.data.getDate()}/${negociacao.data.getMonth() + 1}/${negociacao.data.getFullYear()}</td>
                   <td>${negociacao.quantidade}</td>
@@ -22,13 +24,15 @@ class NegociaoesView extends View<Negociacoes> {
                   <td>${negociacao.volume}</td>
                 </tr>
               `
-            ).join('')}
+        ).join('')}
           </tbody>
           
           <tfoot>
           </tfoot>
       </table>
     `;
+    }
+
   }
 
 }
