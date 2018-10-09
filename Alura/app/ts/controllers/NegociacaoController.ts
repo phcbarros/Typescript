@@ -11,7 +11,7 @@ export class NegociacaoController {
   private _inputValor: JQuery;
   @domInject('#quantidade')
   private _inputQuantidade: JQuery;
-  
+
   private _negociacoes = new Negociacoes();
   private _negociacoesView = new NegociacoesView('#negociacoesView');
   private _mensagemView = new MensagemView('#mensagemView');
@@ -44,6 +44,10 @@ export class NegociacaoController {
   private _ehDiaUtil(data: Date): boolean {
     const diaDaSemana = data.getDay();
     return diaDaSemana != DiasDaSemana.Sabado && diaDaSemana != DiasDaSemana.Domingo;
+  }
+
+  importarDados() {
+    alert('oi');
   }
 }
 
