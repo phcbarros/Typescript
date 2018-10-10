@@ -23,9 +23,7 @@ export function logarTempoDeExecucao(emSegundos: boolean = false) {
       console.log('------------------------------');
       return retorno;
     }
-
-
-
+    
     return descriptor;
   }
 }
