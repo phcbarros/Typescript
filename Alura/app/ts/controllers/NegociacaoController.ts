@@ -1,6 +1,7 @@
 import { Negociacao, Negociacoes, NegociacaoParcial } from '../models/index';
 import { NegociacoesView, MensagemView } from '../views/index';
 import { domInject, meuDecoratorDeClasse, throttle } from '../helpers/decorators/index';
+import { NegociacaoService } from '../services/index';
 
 @meuDecoratorDeClasse()
 export class NegociacaoController {
@@ -15,6 +16,7 @@ export class NegociacaoController {
   private _negociacoes = new Negociacoes();
   private _negociacoesView = new NegociacoesView('#negociacoesView');
   private _mensagemView = new MensagemView('#mensagemView');
+  private _service = new NegociacaoService();
 
   constructor() {
     this._negociacoesView.update(this._negociacoes);
@@ -47,25 +49,21 @@ export class NegociacaoController {
 
   @throttle()
   importarDados(): void {
-    fetch('http://localhost:8080/dados')
-      .then((res: Response) => this._isOK(res))
-      .then((res: Response) => res.json())
-      .then((dados: NegociacaoParcial[]) => {
-        dados
-          .map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
-          .forEach(negociacao => this._negociacoes.adicionar(negociacao));
 
+    function _isOK(res: Response): any {
+      if (res.ok)
+        return res
+      else
+        throw new Error(res.statusText);
+    }
+
+    this._service.obterNegociacoes(_isOK)
+      .then(negociacoes => negociacoes.forEach(negociacao => {
+        this._negociacoes.adicionar(negociacao);
         this._negociacoesView.update(this._negociacoes);
-      })
-      .catch(err => console.log(err));
+      }));
   }
 
-  private _isOK(res: Response): any {
-    if (res.ok)
-      return res
-    else
-      throw new Error(res.statusText);
-  }
 }
 
 enum DiasDaSemana {
