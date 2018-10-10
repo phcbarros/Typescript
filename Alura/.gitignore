@@ -81,3 +81,4 @@ typings/
 
 .DS_Store
 app/js/**/*.js
+ts_node/js/*.txt
