@@ -50,7 +50,7 @@ export class NegociacaoController {
   @throttle()
   importarDados(): void {
 
-    function _isOK(res: Response): any {
+    function _isOK(res: Response): Response {
       if (res.ok)
         return res
       else
