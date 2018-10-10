@@ -7,7 +7,6 @@ export function throttle(milisegundos: number = 500) {
     
     descriptor.value = function(...args: any[]) {
       if(event) event.preventDefault();
-      console.log(`Reiniciado o tempo para espera para execução do método ${propertyKey}`);
       clearTimeout(timer);
       timer = setTimeout(() => metodoOriginal.apply(this, args), milisegundos);
     }

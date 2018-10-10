@@ -8,4 +8,13 @@ export class Negociacao {
   get volume(): number {
     return this.quantidade * this.valor;
   }
+
+  paraTexto(): void {
+    console.log('Impressão');
+    console.log(`
+      ${this.data}
+      ${this.quantidade}
+      ${this.valor}
+      ${this.volume}`);
+  }
 }

@@ -2,6 +2,7 @@ import { Negociacao, Negociacoes, NegociacaoParcial } from '../models/index';
 import { NegociacoesView, MensagemView } from '../views/index';
 import { domInject, meuDecoratorDeClasse, throttle } from '../helpers/decorators/index';
 import { NegociacaoService } from '../services/index';
+import { imprimir } from '../helpers/index';
 
 @meuDecoratorDeClasse()
 export class NegociacaoController {
@@ -40,6 +41,8 @@ export class NegociacaoController {
     this._negociacoes.adicionar(negociacao);
     this._negociacoesView.update(this._negociacoes);
     this._mensagemView.update('Negociação adicionada com sucesso!');
+
+    imprimir(negociacao, this._negociacoes);
   }
 
   private _ehDiaUtil(data: Date): boolean {
