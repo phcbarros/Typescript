@@ -1,3 +1,3 @@
-export abstract class  Impressao {
-  abstract paraTexto(): void;
+export interface  Impressao {
+  paraTexto(): void;
 }

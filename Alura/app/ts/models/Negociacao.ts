@@ -1,13 +1,11 @@
 import { Impressao } from './Impressao';
 
-export class Negociacao extends Impressao {
+export class Negociacao implements Impressao {
 
   constructor(
     readonly data: Date,
     readonly quantidade: number,
-    readonly valor: number) { 
-      super();
-    }
+    readonly valor: number) { }
 
   get volume(): number {
     return this.quantidade * this.valor;

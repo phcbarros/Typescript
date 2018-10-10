@@ -1,7 +1,7 @@
 import { Negociacao } from './Negociacao';
 import { Impressao } from './Impressao';
 
-export class Negociacoes extends Impressao {
+export class Negociacoes implements Impressao {
 
   private _negociacoes: Negociacao[] = [];
 
