@@ -1,5 +1,9 @@
 // Union Types token: string | number
-function processaToken(token: string | number) {
+
+// criando o alias!
+type MeuToken = string |  number;
+
+function processaToken(token: MeuToken) {
   
   let tokenTransformado;
 
