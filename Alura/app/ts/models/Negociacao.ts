@@ -1,9 +1,13 @@
-export class Negociacao {
+import { Impressao } from './Impressao';
+
+export class Negociacao extends Impressao {
 
   constructor(
     readonly data: Date,
     readonly quantidade: number,
-    readonly valor: number) { }
+    readonly valor: number) { 
+      super();
+    }
 
   get volume(): number {
     return this.quantidade * this.valor;
@@ -12,9 +16,9 @@ export class Negociacao {
   paraTexto(): void {
     console.log('Impressão');
     console.log(`
-      ${this.data}
-      ${this.quantidade}
-      ${this.valor}
-      ${this.volume}`);
+      Data: ${this.data}
+      Quantidade: ${this.quantidade}
+      Valor: ${this.valor}
+      Volume: ${this.volume}`);
   }
 }
