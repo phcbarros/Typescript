@@ -16,4 +16,8 @@ export const MyDatabaseModule = {
       console.log(user)
     }
   },
+
+  get(): Array<User> {
+    return users
+  },
 }

@@ -16,5 +16,9 @@ export const MyDatabaseFunction = (function () {
         console.log(user)
       }
     },
+
+    get(): Array<User> {
+      return users
+    },
   }
 })()

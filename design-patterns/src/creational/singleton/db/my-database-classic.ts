@@ -27,4 +27,8 @@ export class MyDatabaseClassic {
       console.log(user)
     }
   }
+
+  get(): Array<User> {
+    return this.users
+  }
 }
